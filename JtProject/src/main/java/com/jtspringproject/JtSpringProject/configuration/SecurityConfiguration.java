@@ -61,6 +61,7 @@ public class SecurityConfiguration {
 		
 		@Bean
 		SecurityFilterChain userFilterChain(HttpSecurity http) throws Exception {
+			 System.out.println(" xxxx");
             http.authorizeHttpRequests(requests -> requests
             		.antMatchers("/login", "/register", "/newuserregister" ,"/test", "/test2").permitAll()
                     .antMatchers("/**").hasRole("USER"))
@@ -72,7 +73,8 @@ public class SecurityConfiguration {
                             })
                             .failureHandler((request, response, exception) -> {
                                 response.sendRedirect("/login?error=true"); // Redirect on failure
-                            }))
+                            })
+                            )
                     
                     .logout(logout -> logout.logoutUrl("/logout")
                             .logoutSuccessUrl("/login")
@@ -80,6 +82,7 @@ public class SecurityConfiguration {
                     .exceptionHandling(exception -> exception
                             .accessDeniedPage("/403")  // Custom 403 page
                         );
+           
 
             http.csrf(csrf -> csrf.disable());
 			return http.build();

@@ -64,6 +64,7 @@ public class userDao {
 	@Transactional
 	public boolean userExists(String username) {
 		Query query = sessionFactory.getCurrentSession().createQuery("from CUSTOMER where username = :username");
+		System.out.println("  "+username + query +"");
 		query.setParameter("username",username);
 		return !query.getResultList().isEmpty();
 	}
@@ -72,7 +73,7 @@ public class userDao {
 	public User getUserByUsername(String username) {
 	        Query<User> query = sessionFactory.getCurrentSession().createQuery("from User where username = :username", User.class);
 	        query.setParameter("username", username);
-	        
+	        System.out.println("  "+username + query +"");
 	        try {
 	            return query.getSingleResult();
 	        } catch (Exception e) {

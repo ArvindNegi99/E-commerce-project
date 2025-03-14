@@ -53,8 +53,9 @@ public class UserController{
 
 	@GetMapping("/login")
 	public ModelAndView userlogin(@RequestParam(required = false) String error) {
+		
 	    ModelAndView mv = new ModelAndView("userLogin");
-	    if ("true".equals(error)) {
+	    if ("true".equals(error) ) {
 	        mv.addObject("msg", "Please enter correct email and password");
 	    }
 	    return mv;
